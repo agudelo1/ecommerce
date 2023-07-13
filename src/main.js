@@ -252,6 +252,28 @@ function handleModal(db) {
     }
   });
 }
+function darkMode() {
+  const iconTheme = document.querySelector("#changeTheme");
+  const bxMoon = document.querySelector(".bx-sun");
+
+  const isDark = () => JSON.parse(localStorage.getItem("isDark"));
+  document.body.classList.toggle("darkmode", isDark());
+
+  iconTheme.addEventListener("click", () => {
+    if (isDark()) {
+      localStorage.setItem("isDark", JSON.stringify(false));
+      document.body.classList.remove("darkmode");
+      bxMoon.classList.remove("bx-sun");
+      bxMoon.classList.add("bx-moon");
+    } else {
+      localStorage.setItem("isDark", JSON.stringify(true));
+      document.body.classList.add("darkmode");
+
+      bxMoon.classList.add("bx-sun");
+      bxMoon.classList.remove("bx-moon");
+    }
+  });
+}
 
 async function main() {
   const db = {
@@ -271,5 +293,6 @@ async function main() {
   handlePrintAmountProducts(db);
   configMixItUp();
   handleModal(db);
+  darkMode();
 }
 main();

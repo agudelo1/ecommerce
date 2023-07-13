@@ -24,7 +24,7 @@ font-family: 'Poppins', sans-serif;
   --header-color: #f5f5f5;
   --navbar-menuColor: #111111;
 }
-body.dark-theme {
+body.darkmode {
   --first-color: hsl(354, 78%, 60%);
   --button-color: hsl(0, 0%, 17%);
   --button-color-alt: hsl(0, 0%, 28%);
@@ -103,6 +103,18 @@ img {
 
 .submenu {
   position: relative;
+}
+
+.content__cart-darkmode {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+.content__darkmode ul li i {
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 .submenu#carrito {
   display: none;
