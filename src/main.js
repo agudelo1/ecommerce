@@ -259,7 +259,7 @@ window.addEventListener("load", () => {
   }
   function darkMode() {
     const iconTheme = document.querySelector("#changeTheme");
-    const bxMoon = document.querySelector(".bx-sun");
+    const changeTheme = document.getElementById("changeTheme");
 
     const isDark = () => JSON.parse(localStorage.getItem("isDark"));
     document.body.classList.toggle("darkmode", isDark());
@@ -268,14 +268,11 @@ window.addEventListener("load", () => {
       if (isDark()) {
         localStorage.setItem("isDark", JSON.stringify(false));
         document.body.classList.remove("darkmode");
-        bxMoon.classList.remove("bx-sun");
-        bxMoon.classList.add("bx-moon");
+        changeTheme.innerHTML = `<i class = "bx bx-sun bx-tada-hover"></i>`;
       } else {
         localStorage.setItem("isDark", JSON.stringify(true));
         document.body.classList.add("darkmode");
-
-        bxMoon.classList.add("bx-sun");
-        bxMoon.classList.remove("bx-moon");
+        changeTheme.innerHTML = `<i class = "bx bx-moon bx-tada-hover"></i>`;
       }
     });
   }
@@ -298,7 +295,43 @@ window.addEventListener("load", () => {
     handlePrintAmountProducts(db);
     configMixItUp();
     handleModal(db);
-    darkMode();
+
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const icon = document.getElementById("icon");
+
+    const isDarkMode = localStorage.getItem("darkMode");
+
+    if (isDarkMode === "true") {
+      enableDarkMode();
+    } else {
+      enableLightMode();
+    }
+
+    darkModeToggle.addEventListener("click", function () {
+      document.body.classList.toggle("darkmode");
+      icon.classList.toggle("bx-moon");
+      icon.classList.toggle("bx-sun");
+
+      if (document.body.classList.contains("darkmode")) {
+        enableDarkMode();
+      } else {
+        enableLightMode();
+      }
+    });
+
+    function enableDarkMode() {
+      localStorage.setItem("darkMode", "false");
+
+      icon.classList.remove("bx-sun");
+      icon.classList.add("bx-moon");
+    }
+
+    function enableLightMode() {
+      localStorage.removeItem("darkMode", "true");
+
+      icon.classList.remove("bx-moon");
+      icon.classList.add("bx-sun");
+    }
   }
   main();
 });
