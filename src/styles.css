@@ -79,10 +79,8 @@ img {
   justify-content: space-between;
 }
 .logo {
-  font-size: 25px;
-  color: #a51010;
-  text-transform: uppercase;
-  font-weight: 800;
+  font-size: 35px;
+  color: var(--navbar-menuColor);
 }
 .menu .navbar ul li {
   position: relative;
@@ -131,6 +129,8 @@ img {
 }
 .home-header-img {
   height: calc(100vh - var(--h-header));
+  width: 100%;
+  min-width: 150px;
 
   display: flex;
   justify-content: center;
@@ -138,7 +138,6 @@ img {
   background-color: var(--first-color);
 }
 .home-header-info {
-  width: 80%;
   height: calc(100vh - var(--h-header));
   justify-content: center;
   align-items: center;
@@ -512,12 +511,8 @@ img {
   .menu .navbar ul li a {
     font-size: 18px;
     padding: 20px;
-    color: #111111;
+    color: var(--navbar-menuColor);
     display: block;
-  }
-
-  .logo {
-    display: none;
   }
 
   .submenu:hover #carrito {
@@ -528,9 +523,7 @@ img {
     padding: 50px 0;
     flex-direction: column;
   }
-  .home-header-img {
-    display: none;
-  }
+
   .home-header-info {
     flex-basis: 100%;
     text-align: center;
@@ -548,5 +541,23 @@ img {
   .info__contact p {
     display: grid;
     padding: 1rem;
+  }
+
+  .home-header-info h2 {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+  .header--info-product {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+  .header--info-product-price {
+    font-size: 1.3rem;
+  }
+  .btn--products-body {
+    letter-spacing: 0.6px;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 1rem;
   }
 }
