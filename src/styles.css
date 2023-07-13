@@ -45,6 +45,7 @@ font-family: 'Poppins', sans-serif;
 body {
   font-family: "Poppins", sans-serif;
   background-color: var(--body-color);
+  transition: 0.5s all;
 }
 
 img {
@@ -544,21 +545,6 @@ img {
   left: 0;
 }
 
-/*.changeTheme::after {
-  content: "";
-  display: block;
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  background-color: #f1f1f1;
-  top: 0;
-  left: 0;
-  right: unset;
-  border-radius: 100px;
-  transition: 0.3s ease all;
-  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
-}*/
-
 .content_loader {
   background-color: #f3f3f3;
   position: fixed;
@@ -582,7 +568,7 @@ img {
   animation: loader 1.5s infinite;
 }
 .loader {
-  color: #b8583b;
+  color: #000000;
   font-size: 15px;
   position: relative;
   animation-delay: -0.16s;

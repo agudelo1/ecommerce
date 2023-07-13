@@ -230,7 +230,7 @@ window.addEventListener("load", () => {
 
         modalHTML.classList.add("modal__hidden");
         const buttonAdd = productFind.quantity
-          ? `<i class='bx bx-plus' id="${productFind.id}"></i>`
+          ? `<i class='bx bx-plus icon-plus' id="${productFind.id}"></i>`
           : "<span class='soldOut'>sold out 💥</span>";
         html += `      
       <div class="modal__content ">
@@ -249,6 +249,28 @@ window.addEventListener("load", () => {
 
         modalHTML.innerHTML = html;
 
+        modalHTML.addEventListener("click", function (e) {
+          if (e.target.classList.contains("icon-plus")) {
+            const id = Number(e.target.id);
+
+            const productFind = db.products.find(
+              (product) => product.id === id
+            );
+
+            if (db.cart[productFind.id]) {
+              if (productFind.quantity === db.cart[productFind.id].amount)
+                return alert("No tenemos mas en bodega 👀");
+              db.cart[productFind.id].amount++;
+            } else {
+              db.cart[productFind.id] = { ...productFind, amount: 1 };
+            }
+            window.localStorage.setItem("cart", JSON.stringify(db.cart));
+            printProductsInCart(db);
+            printTotal(db);
+            handlePrintAmountProducts(db);
+          }
+        });
+
         const iconCloseHTML = document.querySelector(".iconClose");
 
         iconCloseHTML.addEventListener("click", () => {
@@ -258,23 +280,25 @@ window.addEventListener("load", () => {
     });
   }
   function darkMode() {
-    const iconTheme = document.querySelector("#changeTheme");
-    const changeTheme = document.getElementById("changeTheme");
+    const btnChangeTheme = document.querySelector("#changeTheme");
+    btnChangeTheme.addEventListener("click", () => {
+      document.body.classList.toggle("darkmode");
+      btnChangeTheme.classList.toggle("active");
 
-    const isDark = () => JSON.parse(localStorage.getItem("isDark"));
-    document.body.classList.toggle("darkmode", isDark());
-
-    iconTheme.addEventListener("click", () => {
-      if (isDark()) {
-        localStorage.setItem("isDark", JSON.stringify(false));
-        document.body.classList.remove("darkmode");
-        changeTheme.innerHTML = `<i class = "bx bx-sun bx-tada-hover"></i>`;
+      if (document.body.classList.contains("darkmode")) {
+        localStorage.setItem("dark-mode", "true");
       } else {
-        localStorage.setItem("isDark", JSON.stringify(true));
-        document.body.classList.add("darkmode");
-        changeTheme.innerHTML = `<i class = "bx bx-moon bx-tada-hover"></i>`;
+        localStorage.setItem("dark-mode", "false");
       }
     });
+
+    if (localStorage.getItem("dark-mode") === "true") {
+      document.body.classList.add("darkmode");
+      btnChangeTheme.classList.add("active");
+    } else {
+      document.body.classList.remove("darkmode");
+      btnChangeTheme.classList.remove("active");
+    }
   }
 
   async function main() {
@@ -295,26 +319,7 @@ window.addEventListener("load", () => {
     handlePrintAmountProducts(db);
     configMixItUp();
     handleModal(db);
-
-    const btnChangeTheme = document.querySelector("#changeTheme");
-    btnChangeTheme.addEventListener("click", () => {
-      document.body.classList.toggle("darkmode");
-      btnChangeTheme.classList.toggle("active");
-
-      if (document.body.classList.contains("darkmode")) {
-        localStorage.setItem("dark-mode", "true");
-      } else {
-        localStorage.setItem("dark-mode", "false");
-      }
-    });
-
-    if (localStorage.getItem("dark-mode") === "true") {
-      document.body.classList.add("darkmode");
-      btnChangeTheme.classList.add("active");
-    } else {
-      document.body.classList.remove("darkmode");
-      btnChangeTheme.classList.remove("active");
-    }
+    darkMode();
   }
   main();
 });
