@@ -471,6 +471,17 @@ img {
   transition: background-color 0.5s;
 }
 
+.icon-plus {
+  background-color: var(--button-color);
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  align-self: flex-start;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
 .modal__content_info .bx-plus:hover {
   background-color: var(--first-color);
 }
@@ -568,7 +579,7 @@ img {
   animation: loader 1.5s infinite;
 }
 .loader {
-  color: #000000;
+  color: rgb(43, 136, 51);
   font-size: 15px;
   position: relative;
   animation-delay: -0.16s;

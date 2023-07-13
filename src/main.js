@@ -249,27 +249,29 @@ window.addEventListener("load", () => {
 
         modalHTML.innerHTML = html;
 
-        modalHTML.addEventListener("click", function (e) {
-          if (e.target.classList.contains("icon-plus")) {
-            const id = Number(e.target.id);
+        document
+          .querySelector(".modal__content_info")
+          .addEventListener("click", function (e) {
+            if (e.target.classList.contains("icon-plus")) {
+              const id = Number(e.target.id);
 
-            const productFind = db.products.find(
-              (product) => product.id === id
-            );
+              const productFind = db.products.find(
+                (product) => product.id === id
+              );
 
-            if (db.cart[productFind.id]) {
-              if (productFind.quantity === db.cart[productFind.id].amount)
-                return alert("No tenemos mas en bodega 👀");
-              db.cart[productFind.id].amount++;
-            } else {
-              db.cart[productFind.id] = { ...productFind, amount: 1 };
+              if (db.cart[productFind.id]) {
+                if (productFind.quantity === db.cart[productFind.id].amount)
+                  return alert("No tenemos mas en bodega 👀");
+                db.cart[productFind.id].amount++;
+              } else {
+                db.cart[productFind.id] = { ...productFind, amount: 1 };
+              }
+              window.localStorage.setItem("cart", JSON.stringify(db.cart));
+              printProductsInCart(db);
+              printTotal(db);
+              handlePrintAmountProducts(db);
             }
-            window.localStorage.setItem("cart", JSON.stringify(db.cart));
-            printProductsInCart(db);
-            printTotal(db);
-            handlePrintAmountProducts(db);
-          }
-        });
+          });
 
         const iconCloseHTML = document.querySelector(".iconClose");
 
